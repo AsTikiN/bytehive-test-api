@@ -1,0 +1,84 @@
+{
+  "put": {
+    "summary": "Update Outline",
+    "tags": ["Outline"],
+    "security": [
+      {
+        "bearerAuth": []
+      }
+    ],
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "updates": { "$ref": "#/components/schemas/OutlineModel" }
+            },
+            "required": ["updates"]
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Outline updated successfully",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/OutlineModel" }
+          }
+        }
+      },
+      "403": {
+        "description": "Forbidden - You do not own this book or incorrect outline id",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": { "type": "string" }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Outline not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": { "type": "string" }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
